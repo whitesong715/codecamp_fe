@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans CJK KR';
+}
+
+.wrapper {
+    width: 600px;
+    height: 900px;
+    background: #FFFFFF;
+    border: 1px solid #AACDFF;
+    box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);
+    border-radius: 20px;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wrapper__header {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0068FF;
+    margin-bottom: 30px;
+}
+
+.wrapper__body {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, button {    
+    border: 1px solid #cfcfcf;
+    height: 40px;
+    border-radius: 3px;
+}
+
+input::placeholder {
+    font-size: 16px;
+    font-weight: 700;
+    color: #b7b5b5;
+}
+
+.textbox {
+    margin-top: 30px;
+}
+
+.phone {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.phone input {
+    width: 130px;
+}
+
+.auth {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.auth__check {
+    margin-top: 10px;
+}
+
+select {
+    margin-top: 30px;
+    color: #797979;
+}
+
+.gender__check {
+    margin-top: 30px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.divedLine {
+    margin-top: 30px;
+    border: 1px solid #cfcfcfcf;
+}
+
+button {    
+    border: 1px solid #cfcfcf;
+    height: 30px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.submit {
+    margin-top: 30px;
+    height: 50px;
+    cursor: pointer;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>홍길동님의 미니홈피 :: 사이좋은 사람들, 싸이월드</title>
+    <link href="./styles/index.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d370f6d700.js" crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</head>
+<body>
+    <div class="background">
+        <div class="outerbox">
+            <div class="wrapper">
+                <div class="wrapper__left">
+                    <div class="wrapper__left__header">
+                        <div class="today">
+                            <span>TODAY</span>
+                            <span>0</span>
+                            <span>|</span>
+                            <span>TOTAL</span>
+                            <span>12345</span>
+                        </div>
+                    </div>
+                    <div class="wrapper__left__body">
+                        <div class="left__body__header">
+                            <div class="left__body__header__gray"></div>
+                            <div class="left__body__header__line"></div>
+                        </div>
+                        <div class="left__body__profile">
+                            <div class="profile__detail">
+                                <i class="fa-regular fa-face-meh-blank"></i>
+                                <span class="detail__text">이름</span>
+                            </div>
+                            <div class="profile__detail">
+                                <i class="fa-solid fa-phone"></i>
+                                <span class="detail__text">Phone</span>
+                            </div>
+                            <div class="profile__detail">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span class="detail__text">E-mail</span>
+                            </div>
+                            <div class="profile__detail">
+                                <i class="fa-brands fa-instagram"></i>
+                                <span class="detail__text">Instagram</span>
+                            </div>
+                        </div>
+                        <div class="left__body__footer">
+                            <p>오늘의 기분</p>
+                            <select name="feel" id="feelSelect">
+                                <option>기쁨😊</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper__right">
+                    <div class="wrapper__right__header">
+                        <div class="right__header__title">
+                            사이좋은 사람들, 싸이월드
+                        </div>
+                        <div class="right__header__setting">
+                            사생활 보호 설정
+                        </div>
+                    </div>
+                    <div class="wrapper__right__body">
+                        <iframe id="contentFrame" src="./home.html"></iframe>
+                    </div>
+                </div>
+                <!-- nav -->
+                <div class="nav">
+                    <div class="nav__item" id="home" onclick="home()">홈</div>
+                    <div class="nav__item" id="jukebox" onclick="jukebox()">주크박스</div>
+                    <div class="nav__item" id="game" onclick="game()">게임</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

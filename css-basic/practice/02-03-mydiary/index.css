@@ -1,0 +1,132 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0px;
+}
+
+body {
+    background-color: #e5f4d2;
+}
+
+.container {
+    margin: 50px 200px;
+}
+
+.wrapper {
+    background-color: white;
+    border: 1px solid #999999;
+    border-radius: 8px;
+    width: 500px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 20px
+}
+
+.wrapper__head {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper__head__title {
+    background-color: orange;
+    color: white;
+    text-align: center;
+}
+
+.wrapper__head__sub-title {
+    margin-top: 10px;
+}
+
+#point {
+    color: sandybrown;
+    text-decoration: underline;
+}
+
+.line {
+    border: 1px dotted #999999;
+}
+
+.wrapper__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wrapper__body__title {
+    background-color: #f5f5f5;
+    margin-bottom: 10px;
+}
+
+#jeju {
+    color: teal;
+    font-weight: bold;
+}
+
+#date {
+    text-align: right;
+    color: #999999;
+    font-size: 12px;
+}
+
+.header {
+    border-bottom: 1px solid gray;
+    background-color: white;
+}
+
+.header-inner {
+    width: 900px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.logo {
+    float: left;
+    width: 100px;
+    padding: 22px;
+}
+
+.logo h1 a {
+    text-decoration: none;
+    color: orange;
+}
+
+.menu {
+    float: left;
+    width: calc(100% - 200px);
+    height: 80px;
+    text-align: center;
+}
+
+.menu__ul {
+    padding: 0px;
+    display: inline-block;
+}
+
+.menu__ul li {
+    float: left;
+    list-style: none;
+}
+
+.menu__ul li a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 29px 20px;
+}
+
+.menu__ul li a:hover {
+    color: orange;
+}
+
+.user {
+    float: left;
+    height: 80px;
+    width: 100px;
+    padding-top: 23px;
+}
+
+.clearfix {
+    clear: both;
+}
