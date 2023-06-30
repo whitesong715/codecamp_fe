@@ -2,7 +2,7 @@ const todoInput = document.querySelector("#todo-input");
 const todoList = document.querySelector("#todo-list");
 
 const savedTodoList = JSON.parse(localStorage.getItem("saved-items"));
-// console.log(savedTodoList);
+const savedWeatherData = JSON.parse(localStorage.getItem("saved-weather"));
 
 const createTodo = function (storageData) {
   let todoContents = todoInput.value;
@@ -37,7 +37,7 @@ const createTodo = function (storageData) {
 };
 
 const keyCodeCheck = function () {
-  if (window.event.keyCode === 13 && todoInput.value.trim() !== '') {
+  if (window.event.keyCode === 13 && todoInput.value.trim() !== "") {
     createTodo();
   }
 };
@@ -74,12 +74,36 @@ if (savedTodoList) {
   }
 }
 
-const weatherDataActive = function() {
-  const locationNameTag = document.querySelector("#locationNameTag")
-  console.log(locationNameTag)
-}
+const weatherDataActive = function ({ location, weather }) {
+  const weatherMainList = [
+    "Clear",
+    "Clouds",
+    "Drizzle",
+    "Rain",
+    "Snow",
+    "Thunderstorm",
+  ];
+  weather = weatherMainList.includes(weather) ? weather : "fog";
+  const locationNameTag = document.querySelector("#locationNameTag");
 
-const weatherSearch = function ({latitude, longitude}) {
+  locationNameTag.textContent = location;
+  document.body.style.backgroundImage = `url('./images/${weather}.jpg')`;
+
+  if (
+    !savedWeatherData ||
+    savedWeatherData.location !== location ||
+    savedWeatherData.weather !== weather
+  ) {
+    localStorage.setItem(
+      "saved-weather",
+      JSON.stringify({ location, weather })
+    );
+  }
+
+  localStorage.setItem("saved-weather", JSON.stringify({ location, weather }));
+};
+
+const weatherSearch = function ({ latitude, longitude }) {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d0e755251b5e124e8ed66351bbd1d8de`
   )
@@ -87,8 +111,11 @@ const weatherSearch = function ({latitude, longitude}) {
       return res.json();
     })
     .then((json) => {
-      console.log(json.name, json.weather[0].main);
-      weatherDataActive()
+      const weatherData = {
+        location: json.name,
+        weather: json.weather[0].main,
+      };
+      weatherDataActive(weatherData);
     })
     .catch((err) => {
       console.log("catch");
@@ -96,9 +123,9 @@ const weatherSearch = function ({latitude, longitude}) {
     });
 };
 
-const accessToGeo = function ({coords}) {
-  const {latitude, longitude} = coords
-  console.log(latitude, longitude)
+const accessToGeo = function ({ coords }) {
+  const { latitude, longitude } = coords;
+  console.log(latitude, longitude);
   const positionObj = {
     //shorthand property
     latitude, // =latitude: latitude
@@ -114,3 +141,7 @@ const askForLocation = function () {
   });
 };
 askForLocation();
+
+if (savedWeatherData) {
+  weatherDataActive(savedWeatherData);
+}

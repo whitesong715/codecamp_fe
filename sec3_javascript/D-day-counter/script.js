@@ -20,7 +20,6 @@ const dateFormMaker = function () {
 const counterMaker = function (data) {
   if (data !== savedDate) {
     localStorage.setItem("saved-date", data);
-    console.log("이거 됐어?");
   }
   const nowDate = new Date();
   const targetDate = new Date(data).setHours(0, 0, 0, 0);
