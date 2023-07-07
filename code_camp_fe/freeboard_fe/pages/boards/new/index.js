@@ -19,6 +19,7 @@ import {
   SubmitBtn,
   NullErrorM,
 } from "../../../styles/boardNew";
+import { Router, useRouter } from "next/router";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -38,6 +39,7 @@ export default function boardNew() {
   const [SubjectError, setSubjectError] = useState("");
   const [ContentsError, setContentsError] = useState("");
   const [createBoard] = useMutation(CREATE_BOARD);
+  const router = useRouter();
 
   function onChangeName(event) {
     setName(event.target.value);
@@ -74,18 +76,23 @@ export default function boardNew() {
     }
 
     if (name && pwd && subject && contents) {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: name,
-            password: pwd,
-            title: subject,
-            contents: contents,
+      try {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: name,
+              password: pwd,
+              title: subject,
+              contents: contents,
+            },
           },
-        },
-      });
-      console.log(result);
-      alert("게시글이 등록되었습니다.");
+        });
+        console.log(result);
+        router.push(`/boards/${result.data.createBoard._id}`);
+        alert("게시글이 등록되었습니다.");
+      } catch (error) {
+        alert(error.message);
+      }
     }
   };
 
