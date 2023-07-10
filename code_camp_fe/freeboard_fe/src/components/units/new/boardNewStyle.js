@@ -1,5 +1,11 @@
 import styled from "@emotion/styled";
 
+export const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const Wrapper = styled.div`
   width: 1200px;
   /* height: 1715px; */
