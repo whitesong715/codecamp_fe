@@ -16,9 +16,9 @@ import {
   OptionLabel,
   SubmitBtn,
   NullErrorM,
-  NameError,
+  WriterError,
   PwdError,
-  SubjectError,
+  TitleError,
   ContentsError,
   Form,
 } from "./boardNewStyle";
@@ -27,16 +27,18 @@ export default function BoardNewUI(props) {
   return (
     <Form>
       <Wrapper>
-        <Title>게시물 등록</Title>
+        <Title>게시물 {props.isEdit ? "수정" : "등록"}</Title>
         <UserInput>
           <InputWrapper>
             <Label>작성자</Label>
             <TextInput
               type="text"
               placeholder="이름을 입력해주세요"
-              onChange={props.name}
+              onChange={props.writer}
+              defaultValue={props.data?.fetchBoard.writer}
+              readOnly={props.data?.fetchBoard.writer}
             />
-            <NullErrorM>{NameError}</NullErrorM>
+            <NullErrorM>{WriterError}</NullErrorM>
           </InputWrapper>
           <InputWrapper>
             <Label>비밀번호</Label>
@@ -54,8 +56,9 @@ export default function BoardNewUI(props) {
             type="text"
             placeholder="제목을 작성해주세요"
             onChange={props.title}
+            defaultValue={props.data?.fetchBoard.title}
           />
-          <NullErrorM>{SubjectError}</NullErrorM>
+          <NullErrorM>{TitleError}</NullErrorM>
         </InputWrapper>
         <InputWrapper>
           <Label>내용</Label>
@@ -63,6 +66,7 @@ export default function BoardNewUI(props) {
             type="text"
             placeholder="내용을 작성해주세요"
             onChange={props.cnt}
+            defaultValue={props.data?.fetchBoard.contents}
           />
           <NullErrorM>{ContentsError}</NullErrorM>
         </InputWrapper>
@@ -96,7 +100,12 @@ export default function BoardNewUI(props) {
             <OptionLabel>사진</OptionLabel>
           </OptionWrapper>
         </InputWrapper>
-        <SubmitBtn onClick={props.submit}>등록하기</SubmitBtn>
+        <SubmitBtn
+          onClick={props.isEdit ? props.update : props.submit}
+          isActive={props.isEdit ? true : props.isActive}
+        >
+          {props.isEdit ? "수정" : "등록"}하기
+        </SubmitBtn>
       </Wrapper>
     </Form>
   );

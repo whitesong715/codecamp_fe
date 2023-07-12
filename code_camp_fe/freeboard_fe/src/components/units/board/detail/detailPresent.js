@@ -18,9 +18,9 @@ export default function boardDetailUI(props) {
         </S.Detail>
       </S.WrapperDetail>
       <S.Buttons>
-        <S.GoList>목록으로</S.GoList>
-        <S.GoMod>수정하기</S.GoMod>
-        <S.GoDelete>삭제하기</S.GoDelete>
+        <S.GoList onClick={props.onClickList}>목록으로</S.GoList>
+        <S.GoMod onClick={props.onClickEdit}>수정하기</S.GoMod>
+        <S.GoDelete onClick={props.onClickDelete}>삭제하기</S.GoDelete>
       </S.Buttons>
     </S.Wrapper>
   );

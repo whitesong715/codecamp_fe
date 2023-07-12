@@ -1,5 +1,5 @@
-import BoardNewContainer from "../../../src/components/units/new/newContainer";
+import BoardNewContainer from "../../../src/components/units/board/new/newContainer";
 
 export default function boardNew() {
-  return <BoardNewContainer></BoardNewContainer>;
+  return <BoardNewContainer isEdit={false}></BoardNewContainer>;
 }
