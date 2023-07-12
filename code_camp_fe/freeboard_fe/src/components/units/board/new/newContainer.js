@@ -86,7 +86,17 @@ export default function BoardNewContainer(props) {
   };
 
   const onClickUpdate = async () => {
-    console.log("확인1", router.query.boardId);
+    //early-exit 리팩토링 => 기존 코드와 결과는 같지만 내용이 보다 간결
+    if (!title && !contents) {
+      alert("수정내용이 없습니다");
+      return;
+    }
+
+    if (!password) {
+      alert("비밀번호를 입력하세요");
+      return;
+    }
+    //
 
     const updateBoardInput = {};
     if (contents) {
