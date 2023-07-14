@@ -18,7 +18,7 @@ type ccc = Pick<IProfile, "name" | "age">;
 type ddd = Omit<IProfile, "school">;
 
 // 5. Record타입 => IProfile을 value에 넣어 객체로 만들기
-type eee = "철수" | "영희" | "훈이"; //Union타입
+      type eee = "철수" | "영희" | "훈이"; //Union타입
 let child: eee = "철수"; //철수 , 영희 , 훈이만 가능
 let child2: string = "사과"; //철수 영희 훈이 사과 바나나 전부 가능
 
