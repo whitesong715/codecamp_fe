@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <title>Document</title>
+    <script>
+      class ClassCounter {
+        count = 10;
+
+        onClickCountUp = () => {
+          //방법1) 화살표 함수 사용
+          console.log("현재 카운트:", this.count);
+        };
+
+        render() {
+          const button = document.createElement("button");
+          //button.count = 100;
+          button.innerText = "카운트 올리기";
+          button.addEventListener("click", this.onClickCountUp);
+          //button.addEventListener("click", this.onClickCountUp.bind(this)); //방법2) .bind(this)를 통해 연결시키는 방법
+          document.body.appendChild(button); //버튼 HTML에 나타내기
+        }
+      }
+
+      window.onload = () => {
+        const counter = new ClassCounter();
+        counter.render();
+      };
+    </script>
+  </head>
+  <body></body>
+</html>
