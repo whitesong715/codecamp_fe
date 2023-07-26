@@ -8,6 +8,8 @@ import { createUploadLink } from "apollo-upload-client";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../stores";
 import { useEffect } from "react";
+import { onError } from "@apollo/client/link/error";
+import { GraphQLClient, gql } from "graphql-request";
 
 const GLOBAL_STATE = new InMemoryCache();
 
@@ -42,6 +44,45 @@ export default function ApolloSetting(props: IApolloProps): JSX.Element {
     setAccessToken(result ?? "");
   }, []);
 
+  const RESTORE_ACCESS_TOKEN = gql`
+    mutation {
+      restoreAccessToken {
+        accessToken
+      }
+    }
+  `;
+
+  const errorLink = onError(async ({ graphQLErrors, operation, forward }) => {
+    // 1. 에러를 캐치
+    if (typeof graphQLErrors !== "undefined") {
+      for (const err of graphQLErrors) {
+        // 1-2. 해당 에러가 토큰만료 에러인지 체크(UNAUTHENTICATED)
+        if (err.extensions.code === "UNAUTHENTICATED") {
+          // 2. refreshToken으로 accessToken을 재발급 받기
+
+          const graphQLClient = new GraphQLClient(
+            "http://backend-practice.codebootcamp.co.kr/graphql",
+          );
+          const result = await graphQLClient.request(RESTORE_ACCESS_TOKEN);
+          const newAccessToken = result.restoreAccessToken.accessToken;
+          setAccessToken(newAccessToken);
+
+          // 3. 재발급 받은 accessToken으로 방금 실패한 쿼리 재요청
+          operation.getContext().headers;
+
+          operation.setContext({
+            headers: {
+              ...operation.getContext().headers,
+              Authorization: `Bearer ${newAccessToken}`,
+            },
+          });
+
+          forward(operation);
+        }
+      }
+    }
+  });
+
   const uploadLink = createUploadLink({
     uri: "http://backend-practice.codebootcamp.co.kr/graphql",
     headers: {
@@ -50,7 +91,7 @@ export default function ApolloSetting(props: IApolloProps): JSX.Element {
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink]),
+    link: ApolloLink.from([errorLink, uploadLink]),
     cache: GLOBAL_STATE, // 컴퓨터의 메모리에다가 백엔드에서 받아온 데이터 임시 저장 ==> 나중에 자세히
   });
 

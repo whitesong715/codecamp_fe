@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <title>이벤트루프</title>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script>
+      const onClickLoop = () => {
+        const aaa = () => {
+          try {
+            axios.get("https://qqqq.com");
+          } catch (error) {
+            console.log("에러발생");
+          }
+        };
+
+        aaa();
+
+        const bbb = async () => {
+          try {
+            await axios.get("https://qqqq.com");
+          } catch (error) {
+            console.log("에러발생");
+          }
+        };
+
+        bbb();
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickLoop()">시작</button>
+  </body>
+</html>
