@@ -24,6 +24,7 @@ export default function Login(): JSX.Element {
   const client = useApolloClient();
 
   const onClickButton = async (): Promise<void> => {
+    console.log("버튼클릭");
     const result = await client.query({
       query: FETCH_USER_LOGGED_IN,
     });
