@@ -1,13 +1,18 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
+const qqq = [];
+
 export default function ImagePreload(): JSX.Element {
   const router = useRouter();
 
   useEffect(() => {
     const img = new Image();
-    img.src = "강아지.png";
-    img.onload = () => {};
+    img.src =
+      "https://blog.kakaocdn.net/dn/dP8ypg/btqBO7WjtW8/uTKrFK74r6MjHg3n3lPPXK/img.jpg";
+    img.onload = () => {
+      qqq.push(img);
+    };
   }, []);
 
   const onClickMove = (): void => {
